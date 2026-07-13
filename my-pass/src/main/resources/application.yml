@@ -1,0 +1,9 @@
+server:
+  port: 18000
+
+spring:
+  application:
+    name: my-pass
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848

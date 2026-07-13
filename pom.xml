@@ -22,6 +22,7 @@
         <module>common</module>
         <module>demo</module>
         <module>gateway</module>
+        <module>my-pass</module>
     </modules>
 
     <properties>

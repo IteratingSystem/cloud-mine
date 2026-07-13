@@ -10,7 +10,6 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/my-pass/nacos/pom.xml" />
-        <option value="$PROJECT_DIR$/my-pass/pom.xml" />
       </set>
     </option>
   </component>

@@ -28,7 +28,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
     // 白名单
     private static final List<String> WHITELIST = List.of(
             "/auth-demo/auth/login",
-            "/auth-demo/auth/test-token"
+            "/auth-demo/auth/test-token",
+            "/my-pass/test/get"
     );
 
     private final ObjectMapper objectMapper = new ObjectMapper();

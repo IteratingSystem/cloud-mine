@@ -16,7 +16,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>cloud-demo</name>
+    <name>cloud-mine</name>
     <description>SpringCloud学习项目</description>
     <modules>
         <module>common</module>

@@ -2,6 +2,7 @@ package org.example.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
+import org.example.config.AuthProperties;
 import org.example.result.R;
 import org.example.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,9 @@ import java.util.List;
 public class AuthFilter implements GlobalFilter, Ordered {
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private AuthProperties authProperties;   // 注入配置
 
-    // 白名单
-    private static final List<String> WHITELIST = List.of(
-            "/auth-demo/auth/login",
-            "/auth-demo/auth/test-token",
-            "/my-pass/test/get"
-    );
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -64,7 +61,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
     }
 
     private boolean isWhitelist(String path) {
-        return WHITELIST.stream().anyMatch(path::startsWith);
+        return authProperties.getWhitelist().stream().anyMatch(path::startsWith);
     }
 
     private String extractToken(ServerHttpRequest request) {

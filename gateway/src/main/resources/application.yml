@@ -18,3 +18,10 @@ spring:
           uri: lb://auth-demo
           predicates:
             - Path=/auth/**
+
+auth:
+  # 白名单
+  whitelist:
+    - /auth-demo/auth/login
+    - /auth-demo/auth/test-token
+    - /my-pass/test/get

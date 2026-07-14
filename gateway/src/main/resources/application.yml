@@ -20,9 +20,13 @@ spring:
             - Path=/auth/**
 
 auth:
+  tokenKeys:
+    - Token
+    - Authorization
   # 白名单
   whitelist:
     - /auth-demo/auth/login
     - /auth-demo/auth/test-token
     - /my-pass/test/get
     - /my-pass/users/register
+    - /my-pass/users/login

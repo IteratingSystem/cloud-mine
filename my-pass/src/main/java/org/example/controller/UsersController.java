@@ -65,10 +65,11 @@ public class UsersController {
         return R.success(Map.of("token", token));
     }
 
-    @GetMapping("/info")
-    public R<Map<String, Object>> info(@RequestHeader("X-User-Id") Long userId) {
+
+    @GetMapping("/findByUsername")
+    public R<Map<String, Object>> findByUsername(@RequestHeader("username") String username) {
         // 从请求头获取userId，由AuthFilter注入
-        Users user = usersService.findById(userId);
+        Users user = usersService.findByUsername(username);
         if (user == null) {
             return R.error("用户不存在");
         }

@@ -18,7 +18,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 @Component
 public class AuthFilter implements GlobalFilter, Ordered {
@@ -41,7 +40,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
         String token = extractToken(request);
         if (token == null) {
-            return unauthorized(exchange, "缺少 Token");
+            String tokenKeysStr = authProperties.getTokenKeys().toString();
+            return unauthorized(exchange, "缺少 Token,需要在Headers中传入其中之一:"+tokenKeysStr);
         }
 
         if (!jwtUtil.validateToken(token)) {
@@ -64,15 +64,21 @@ public class AuthFilter implements GlobalFilter, Ordered {
     }
 
     private String extractToken(ServerHttpRequest request) {
-        List<String> headers = request.getHeaders().get("Authorization");
-        if (headers == null || headers.isEmpty()) {
+        String token = "";
+        for (String tokenKey : authProperties.getTokenKeys()) {
+            if (request.getHeaders().containsKey(tokenKey)) {
+                token =  request.getHeaders().getFirst(tokenKey);
+                break;
+            }
+        }
+
+        if (token == null || token.isEmpty()) {
             return null;
         }
-        String authHeader = headers.get(0);
-        if (authHeader.startsWith("Bearer ")) {
-            return authHeader.substring(7);
+        if (token.startsWith("Bearer ")) {
+            return token.substring(7);
         }
-        return authHeader;
+        return token;
     }
 
     private Mono<Void> unauthorized(ServerWebExchange exchange, String message) {

@@ -25,8 +25,8 @@ public class Users {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    @TableField("user_name")
-    private String userName;
+    @TableField("username")
+    private String username;
 
     @TableField("password_hash")
     private String passwordHash;

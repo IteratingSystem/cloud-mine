@@ -4,21 +4,21 @@
 <mapper namespace="org.example.mapper.UsersMapper">
     <!-- 重写 insert，不插入时间字段，让数据库自动生成 -->
     <insert id="insert" parameterType="org.example.entity.Users" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO users (user_name, password_hash)
-        VALUES (#{userName}, #{passwordHash})
+        INSERT INTO users (username, password_hash)
+        VALUES (#{username}, #{passwordHash})
         <!-- 注意：不包含 created_at 和 updated_at -->
     </insert>
 
     <!-- 根据用户名查询用户 -->
-    <select id="findByUserName" resultType="org.example.entity.Users">
+    <select id="findByUsername" resultType="org.example.entity.Users">
         SELECT
         id,
-        user_name,
+        username,
         password_hash as passwordHash,
         created_at as createdAt,
         updated_at as updatedAt
         FROM users
-        WHERE user_name = #{userName}
+        WHERE username = #{username}
     </select>
 
 

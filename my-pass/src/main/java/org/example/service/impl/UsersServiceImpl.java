@@ -15,8 +15,8 @@ public class UsersServiceImpl implements UsersService {
     private UsersMapper usersMapper;
 
     @Override
-    public Users findByUserName(String userName) {
-        return usersMapper.findByUserName(userName);
+    public Users findByUsername(String userName) {
+        return usersMapper.findByUsername(userName);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public void createUser(String userName, String passwordHash) {
         Users user = new Users();
-        user.setUserName(userName);
+        user.setUsername(userName);
         user.setPasswordHash(passwordHash);
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());

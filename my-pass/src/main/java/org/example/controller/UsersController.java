@@ -33,13 +33,13 @@ public class UsersController {
 
     @PostMapping("/register")
     public R<String> register(@RequestBody Map<String, String> params) {
-        String username = params.get("userName");
-        String password = params.get("passWord");
+        String username = params.get("username");
+        String password = params.get("password");
         if (username == null || password == null) {
-            return R.error("用户名和密码不能为空");
+            return R.error("字段错误:未抓取到用户名与密码(username,password)");
         }
         // 检查用户名是否已存在
-        if (usersService.findByUserName(username) != null) {
+        if (usersService.findByUsername(username) != null) {
             return R.error("用户名已存在");
         }
         // 加密密码
@@ -51,17 +51,17 @@ public class UsersController {
 
     @PostMapping("/login")
     public R<Map<String, String>> login(@RequestBody Map<String, String> params) {
-        String username = params.get("userName");
-        String password = params.get("passWord");
+        String username = params.get("username");
+        String password = params.get("password");
         if (username == null || password == null) {
-            return R.error("字段错误:未抓取到用户名与密码(userName,passWord)");
+            return R.error("字段错误:未抓取到用户名与密码(username,password)");
         }
-        Users user = usersService.findByUserName(username);
+        Users user = usersService.findByUsername(username);
         if (user == null || !passwordEncoder.matches(password, user.getPasswordHash())) {
             return R.error("用户名或密码错误");
         }
         // 生成token
-        String token = jwtUtil.generateToken(user.getId(), user.getUserName());
+        String token = jwtUtil.generateToken(user.getId(), user.getUsername());
         return R.success(Map.of("token", token));
     }
 
@@ -74,7 +74,7 @@ public class UsersController {
         }
         return R.success(Map.of(
                 "id", user.getId(),
-                "userName", user.getUserName(),
+                "userName", user.getUsername(),
                 "createdAt", user.getCreatedAt()
         ));
     }

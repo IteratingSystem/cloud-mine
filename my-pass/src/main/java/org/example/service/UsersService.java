@@ -14,7 +14,7 @@ import org.example.entity.Users;
  * @see UsersService
  */
 public interface UsersService {
-    Users findByUserName(String userName);
+    Users findByUsername(String username);
     Users findById(Long id);
-    void createUser(String userName, String hashed);
+    void createUser(String username, String hashed);
 }

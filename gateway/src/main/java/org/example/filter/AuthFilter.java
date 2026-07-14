@@ -1,7 +1,6 @@
 package org.example.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.PostConstruct;
 import org.example.config.AuthProperties;
 import org.example.result.R;
 import org.example.utils.JwtUtil;

@@ -25,3 +25,4 @@ auth:
     - /auth-demo/auth/login
     - /auth-demo/auth/test-token
     - /my-pass/test/get
+    - /my-pass/users/register
